@@ -1,4 +1,4 @@
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup as BS
 import time
 import requests
 
@@ -21,4 +21,7 @@ class Crawler:
     def fetch(self, URL):
         # get the page at the url specified and then write 
         # the subsequent data to the csv file.
-        pass
+        page = requests.get(URL)
+        soup = BS(page.content, "html.parser")
+        print(soup.prettify())
+

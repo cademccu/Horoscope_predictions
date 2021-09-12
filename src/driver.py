@@ -2,7 +2,7 @@ import time
 
 # my imports
 import constants
-import crawler
+from crawler import Crawler
 
 
 def download():
