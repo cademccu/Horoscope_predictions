@@ -25,7 +25,7 @@ class Crawler:
 
     def writefile(self, sign, date, value):
         self.file.write(sign + "," + date + ",\"" + value + "\"\n")
-        print("[\tCSV]: " + sign + "," + date + "," + value[:20])
+        print("\t[CSV]: " + sign + "," + date + "," + value[:20])
 
 
 
