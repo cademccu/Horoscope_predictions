@@ -43,10 +43,13 @@ class Crawler:
         dates = soup.find_all(class_ = "entry-header")
 
         for i in range(len(texts)):
-            textstr = texts[i].find('p').get_text()
-            date = dates[i].find('p').find('time').get_text().split()
-            dateobj = datetime.datetime.strptime(date[0], "%B")
-            datestr = date[1].replace(",","").zfill(2) + "/" + str(dateobj.month).zfill(2) + "/" + date[2]
-            self.writefile(sign, datestr, textstr)
-            
+            try:
+                textstr = texts[i].find('p').get_text()
+                date = dates[i].find('p').find('time').get_text().split()
+                dateobj = datetime.datetime.strptime(date[0], "%B")
+                datestr = date[1].replace(",","").zfill(2) + "/" + str(dateobj.month).zfill(2) + "/" + date[2]
+                self.writefile(sign, datestr, textstr)
+            except AttributeError:
+                print("[ERROR] Attribute error occured. Omitting this entry...")
+                continue  
 
