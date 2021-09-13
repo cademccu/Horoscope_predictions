@@ -7,6 +7,9 @@ from crawler import Crawler
 
 
 def download():
+    # This method uses a crawler object to write data to a file.
+    # the URLs are created in the loops and conditionals to 
+    # sequentially access the webpages.
     crawler = Crawler(sys.argv[1])    
     for sign in constants.SIGNS:
         print("[SIGN] " + sign)
@@ -21,7 +24,6 @@ def download():
             time.sleep(1)
 
 
-# Main method
 def main():
     if (len(sys.argv) != 2):
         print("Please provide only a single filename as the args.")
@@ -32,7 +34,5 @@ def main():
     print("\nDownload complete, and written to file: " + sys.argv[1])
     sys.exit(0)
 
-
-# Call to main method
 if __name__ == "__main__":
     main()
