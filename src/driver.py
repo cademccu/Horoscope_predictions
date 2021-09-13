@@ -13,10 +13,12 @@ def download():
         url = constants.URL
         url = url.replace(constants.SIGN, sign)
         for page_number in range(constants.NUMBER_OF_PAGES):
+            print("page: " + str(page_number))
             if (page_number + 1) == 1:
                 crawler.fetch(constants.BASE_URL.replace(constants.SIGN, sign), sign)
             else:
                 crawler.fetch(url.replace(constants.PAGE_NUMBER, str(page_number + 1)), sign)
+            time.sleep(1)
 
 
 # Main method

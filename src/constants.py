@@ -23,4 +23,4 @@ PAGE_NUMBER = "${PAGE_NUMBER}"
 
 
 # number of pages deep to go in scraping history
-NUMBER_OF_PAGES = 1
+NUMBER_OF_PAGES = 2
