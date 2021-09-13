@@ -3,12 +3,14 @@ import time
 import requests
 import datetime
 
+# my constants
 import constants
 
 class Crawler:
     # This class uses the requests library to fetch a webpage,
     # then uses beautiful soup to parse the data, and append
-    # to a csv file for use later.
+    # to a csv file for use later. The file is kept open
+    # to avoid costly I/O resources, and closed upon sys.exit()
     def __init__(self, filename):
         self.file = None
 
@@ -19,11 +21,12 @@ class Crawler:
             print(io)
             sys.exit(0)
 
-    # clean up resources
+    # clean up resources and close file.
     def __del__(self):
         self.file.close()
 
     def writefile(self, sign, date, value):
+        # Logs the data, and writes the data to the CSV file in a readable format.
         self.file.write(sign + "," + date + ",\"" + value + "\"\n")
         print("[\tCSV]: " + sign + "," + date + "," + value[:20])
 

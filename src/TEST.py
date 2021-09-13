@@ -1,7 +1,15 @@
-
-
 from crawler import Crawler
 import constants
+
+
+"""
+This file is just some test code for my objects/classes,
+and to find the correct beautifulsoup cammands to get
+my information.
+"""
+
+
+
 
 
 #crawler = Crawler("test.csv")
