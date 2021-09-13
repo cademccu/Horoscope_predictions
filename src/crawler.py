@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup as BS
 import time
 import requests
-
+import datetime
 
 import constants
 
@@ -10,18 +10,40 @@ class Crawler:
     # then uses beautiful soup to parse the data, and append
     # to a csv file for use later.
     def __init__(self, filename):
-        self.filename = filename
+        self.file = None
+
+        try:
+            self.file = open(filename, 'a')
+        except IOError as io:
+            print("[ERROR] Error occured when opening file:")
+            print(io)
+            sys.exit(0)
+
+    # clean up resources
+    def __del__(self):
+        self.file.close()
+
+    def writefile(self, sign, date, value):
+        self.file.write(sign + "," + date + "," + value + "\n")
+        print("[\tCSV]: " + sign + "," + date + "," + value[:20])
 
 
-    
 
-
-
-
-    def fetch(self, URL):
+    def fetch(self, URL, sign):
         # get the page at the url specified and then write 
         # the subsequent data to the csv file.
         page = requests.get(URL)
         soup = BS(page.content, "html.parser")
-        print(soup.prettify())
+
+        # probably a clearer more dynamic way to do this but results are constant
+        texts = soup.find_all(class_ = "entry-content")
+        dates = soup.find_all(class_ = "entry-header")
+
+        for i in range(len(texts)):
+            textstr = texts[i].find('p').get_text()
+            date = dates[i].find('p').find('time').get_text().split()
+            dateobj = datetime.datetime.strptime(date[0], "%B")
+            datestr = date[1].replace(",","").zfill(2) + "/" + str(dateobj.month).zfill(2) + "/" + date[2]
+            self.writefile(sign, datestr, textstr)
+            
 

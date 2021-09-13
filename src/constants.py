@@ -20,5 +20,7 @@ BASE_URL = "https://mystarshoroscopes.com/category/${SIGN}/${SIGN}-daily-horosco
 SIGN = "${SIGN}"
 PAGE_NUMBER = "${PAGE_NUMBER}"
 
+
+
 # number of pages deep to go in scraping history
-NUMBER_OF_PAGES = 3
+NUMBER_OF_PAGES = 1
